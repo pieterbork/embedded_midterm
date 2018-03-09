@@ -10,6 +10,10 @@ def index():
 def camp():
     return render_template('camp.html')
 
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
+
 @app.route('/cards')
 def cards():
     return render_template('cards.html')
