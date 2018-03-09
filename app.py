@@ -6,9 +6,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/camp')
+@app.route('/blank')
 def camp():
-    return render_template('camp.html')
+    return render_template('blank.html')
 
 @app.route('/charts')
 def charts():
