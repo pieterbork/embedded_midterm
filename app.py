@@ -3,13 +3,17 @@ from flask_socketio import SocketIO
 from flask_socketio import emit
 import mraa, time
 import os, sys
-from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib import urlencode
+from urllib2 import urlopen
 
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 disco_mode = False
+
+pigtail=mraa.Gpio(10)
+pigtail.dir(mraa.DIR_OUT)
+
 
 @app.route('/')
 def index():
@@ -24,10 +28,12 @@ def disco():
         disco_mode = False
         msg = "off"
         url += "1"
+        pigtail.write(0)
     else:
         disco_mode = True
         msg = "on"
         url += "0"
+        pigtail.write(1)
     
     socketio.emit('update', {'msg':msg});
 
